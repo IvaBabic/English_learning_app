@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Learner;
+use App\Models\Sentence;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,12 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'body' =>fake()->text(),
+            'learner_id' => fake()->randomElement(Learner::pluck('id')->toArray()),
+            'sentence_id' => fake()->randomElement(Sentence::pluck('id')->toArray()),
+
+
+
         ];
     }
 }

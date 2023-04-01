@@ -17,7 +17,8 @@ class SentenceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'body' =>fake()->text(),
+            'level' => fake()->randomElement(['beginner' ,'intermediate', 'advanced']),
         ];
     }
 }
