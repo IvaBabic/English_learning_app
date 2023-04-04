@@ -31,10 +31,28 @@ use App\Http\Controllers\API\AuthController;
 
 
 //protected
-Route::group(['middleware' => ['auth:sanctum']], function () {
+// Route::group(['middleware' => ['auth:sanctum']], function () {
+//     Route::resource('/learners', LearnerController::class);
+//     Route::get('/learners/search/{name}', [LearnerController::class, 'search']);
+//   Route::post('/logout', [AuthController::class, 'logout']);
+
+
+// });
+
+Route::group(['middleware' => ['auth:admin']], function () {
     Route::resource('/learners', LearnerController::class);
     Route::get('/learners/search/{name}', [LearnerController::class, 'search']);
+    // Route::post('/logout', [AuthController::class, 'logout']);
+
+
+});
+
+Route::group(['middleware' => ['auth:learners']], function () {
+    //Route::post('/logout', [AuthController::class, 'logout']);
+
+
+});
+
+Route::group(['middleware' => ['auth:learners', 'auth:admin']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-
-
 });
