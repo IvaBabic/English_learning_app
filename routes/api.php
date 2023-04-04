@@ -1,8 +1,10 @@
 <?php
-use App\Models\Learner;
 
+use App\Http\Controllers\LearnerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,20 +17,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/learners', function (){
-//     return Learner::all();
-// });
+// Route::get('/learners', [LearnerController::class, 'index']);
+// Route::post('/learners', [LearnerController::class, 'store']);
+// Route::get('/learners/{id}', [LearnerController::class, 'show']);
+// Route::put('/learners/{id}', [LearnerController::class, 'update']);
 
-// Route::post('/learners', function (){
-//     return Learner::create([
-//         'first_name' => 'Test',
-//             'last_name' =>'Test',
-//             'email' => 'test@yahoo.com',
-//             'password' => 'password',
-//             'level' => 'beginner',
-//     ]);
-// });
+//public
+ Route::post('/register', [AuthController::class, 'register']);
+ Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+
+
+//protected
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::resource('/learners', LearnerController::class);
+    Route::get('/learners/search/{name}', [LearnerController::class, 'search']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+
 });
