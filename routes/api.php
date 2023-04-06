@@ -4,6 +4,8 @@ use App\Http\Controllers\LearnerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\DictionaryController;
+
 
 
 /*
@@ -21,6 +23,9 @@ use App\Http\Controllers\API\AuthController;
 // Route::post('/learners', [LearnerController::class, 'store']);
 // Route::get('/learners/{id}', [LearnerController::class, 'show']);
 // Route::put('/learners/{id}', [LearnerController::class, 'update']);
+
+//dictionary api
+Route::get('/search/{word}', [DictionaryController::class, 'getWord']);
 
 //public
  Route::post('/register', [AuthController::class, 'register']);
@@ -42,17 +47,15 @@ use App\Http\Controllers\API\AuthController;
 Route::group(['middleware' => ['auth:admin']], function () {
     Route::resource('/learners', LearnerController::class);
     Route::get('/learners/search/{name}', [LearnerController::class, 'search']);
-    // Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/logoutAdmin', [AuthController::class, 'logout']);
 
 
 });
 
 Route::group(['middleware' => ['auth:learners']], function () {
-    //Route::post('/logout', [AuthController::class, 'logout']);
-
-
-});
-
-Route::group(['middleware' => ['auth:learners', 'auth:admin']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+
+
 });
+
+
