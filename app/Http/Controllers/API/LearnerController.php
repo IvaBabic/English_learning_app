@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Learner;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Enum;
 
 class LearnerController extends Controller
 {
@@ -26,7 +27,8 @@ class LearnerController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
+            'status' => [new Enum(ServerStatus::class)],
         ]);
 
         return Learner::create($request->all());
