@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\DictionaryController;
 use App\Http\Controllers\API\SentenceController;
+use App\Http\Controllers\API\CommentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -52,11 +54,18 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::post('/sentences', [SentenceController::class, 'store']);
     Route::put('/sentences/{sentence}', [SentenceController::class, 'update']);
     Route::delete('/sentences/{sentence}', [SentenceController::class, 'destroy']);
+    Route::post('/commentsAdmin', [CommentController::class, 'store']);
+
 });
 
 //protected learner routes
 Route::group(['middleware' => ['auth:learners']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/comments', [CommentController::class, 'store']);
+    Route::put('/comments/{id}', [CommentController::class, 'update']);
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy']);
+
+
 
 
 });
@@ -68,10 +77,7 @@ Route::get('/sentences/{sentence}', [SentenceController::class, 'show']);
 Route::get('/sentences/search/{name}', [SentenceController::class, 'search']);
 
 
-// //protected routes for the Sentence model - only admin
-// Route::group(['middleware' => ['auth:admin']], function () {
-//     Route::post('/sentences', [SentenceController::class, 'store']);
-//     Route::put('/sentences/{sentence}', [SentenceController::class, 'update']);
-//     Route::delete('/sentences/{sentence}', [SentenceController::class, 'destroy']);
-// });
+Route::get('/comments', [CommentController::class, 'index']);
+Route::get('/comments/{id}', [CommentController::class, 'show']);
+
 
