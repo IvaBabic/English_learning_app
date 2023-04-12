@@ -1,10 +1,11 @@
 <?php
 
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Models\Learner;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Validation\Rules\Enum;
 
 class LearnerController extends Controller
