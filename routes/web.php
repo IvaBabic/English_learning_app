@@ -22,6 +22,8 @@ Route::get('/', function () {
     return view('1welcome');
 });
 
+Route::post('/login', [AuthController::class, 'login']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
