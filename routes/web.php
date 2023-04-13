@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//==============Admin Route=============================
+Route::prefix('admin')->group(function(){
+    Route::get('/login', [TeacherController::class, 'loginAdminform'])->name('login_form');
+    Route::post('/login/owner', [TeacherController::class, 'login'])->name('admin_login');
+    Route::get('/dashboard', [TeacherController::class, 'dashboard'])->name('admin_dashboard')->middleware('admin');
+    Route::get('/logout', [TeacherController::class, 'logoutAdmin'])->name('admin_logout')->middleware('admin');
+
+
+
+});
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -22,17 +34,15 @@ Route::get('/', function () {
     return view('1welcome');
 });
 
-Route::post('/login', [AuthController::class, 'login']);
 
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';

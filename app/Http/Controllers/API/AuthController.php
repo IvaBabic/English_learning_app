@@ -57,8 +57,7 @@ class AuthController extends Controller
             'last_name' => $fields['last_name'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password']),
-           // 'level' => 'required|in:Beginner,Intermediate,Advanced'
-           'status' => [new Enum(ServerStatus::class)]
+            'status' => [new Enum(ServerStatus::class)]
            
         ]);
 
