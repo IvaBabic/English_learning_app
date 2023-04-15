@@ -29,4 +29,5 @@ class TeacherController extends Controller
         Auth::guard('admin')->logout();
         return redirect()->route('login_form')->with('error', 'Teacher Logout is a success.');
     }
+
 }

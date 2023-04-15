@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -47,14 +48,34 @@
 
                 <div class="mt-16">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                        <a href="" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                             <div>
                                 
 
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Welcome Admin, {{ Auth::guard('admin')->user()->email }}</h2>
+                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Update the sentence</h2>
 
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                                                  </p>
+                                <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{  url('/edit_sentences/' .$sentence->id) }}">
+                               
+                        @csrf
+                        @method('PUT')
+        <div class="form-group">
+          <label for="exampleInputEmail1" style="color: whitesmoke;">Body</label>
+          <input placeholder="{{$sentence->body}}" type="text"  name="body" class="form-control" required="">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1" style="color: whitesmoke;">Level</label>
+          <select name="level" class="form-select">
+                @foreach ($levels as $level)
+                    <option value="{{$level}}" selected="">{{$level}}</option>
+                @endforeach
+          </select>
+          <div class="form-group">
+          <button type="submit" class="btn btn-primary" style="background-color: white" >Submit</button>
+          </div>
+        </div>
+        
+      </form>
+
+                              
                             </div>
                         </a>
 
@@ -62,28 +83,6 @@
 
                         
 
-                        <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">What do you want to do? </h2>
-
-                                <ul>
-                                <li><a href="/sentences" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Browse sentences</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Update sentences</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Create sentences</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Delete sentences</a></li>
-
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Browse learners</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Update learners</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Create learners</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Delete learners</a></li>
-
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Browse comments</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Update comments</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Create comments</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Delete comments</a></li>
-
-                                </ul>
 
                                 <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
 
@@ -94,21 +93,7 @@
                 </div>
 
                 
-                
-                <div class="mt-16">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                        <!-- <a href="" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"> -->
-                            <div>
-                                
-
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Dictionary</h2>
-
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    Look up words you don`t know.                              </p>
-                                <input id="searched" name="searchedWord" style="background-color: blueviolet;">
-                            </div>
-                        <!-- </a> -->
-
+              
 
                 <div class="flex justify-center mt-16 px-0 sm:items-center sm:justify-between">
                     <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">
@@ -121,4 +106,4 @@
             </div>
         </div>
     </body>
-</html>
+</html>          

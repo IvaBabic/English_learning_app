@@ -17,13 +17,14 @@
     </head>
     <body class="antialiased">
 
-            <!-- <form method="POST" action="{{ route('admin_logout') }}">
+           <form method="POST" action="{{ route('admin_logout') }}">
                   @csrf
                   <button type="button" class="btn btn-primary" style="background-color:white; width:50%; right:0px" >Logout</button>
-              </form> -->
+              </form> 
 
-              <a href="{{ route('admin_logout') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Logout</a>
+              <a href="/sentences" class="btn btn-outline-primary btn-sm" style="color: black;">Go back</a>
 
+               <!-- <a href="{{ route('admin_logout') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Logout</a> -->
 
 
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
@@ -45,16 +46,38 @@
 
             <div class="max-w-7xl mx-auto p-6 lg:p-8">
 
+           
+
                 <div class="mt-16">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                        <a href="" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                             <div>
                                 
 
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Welcome Admin, {{ Auth::guard('admin')->user()->email }}</h2>
+                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Sentence number {{$sentence->id}}</h2>
 
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                                                  </p>
+                                <div class="container">
+        <div class="row">
+            <div class="col-12 pt-2">
+                
+
+                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{{ ucfirst($sentence->body) }}</p> 
+                <br>
+
+                <hr>
+                <a href="/sentences/{{ $sentence->id }}/edit" class="btn btn-outline-primary" style="color: whitesmoke;">Update Sentence</a>
+                <br><br>
+                <form id="delete-frm" class="" action="{{ url('/sentences/'.$sentence->id) }}" method="POST">
+                    
+                    @method('DELETE') 
+                    @csrf 
+                    <button class="btn btn-danger" style="color: whitesmoke;">Delete Sentence</button>
+                </form>
+               
+            </div>
+        </div>
+    </div>
+
+                              
                             </div>
                         </a>
 
@@ -62,31 +85,7 @@
 
                         
 
-                        <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">What do you want to do? </h2>
-
-                                <ul>
-                                <li><a href="/sentences" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Browse sentences</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Update sentences</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Create sentences</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Delete sentences</a></li>
-
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Browse learners</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Update learners</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Create learners</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Delete learners</a></li>
-
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Browse comments</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Update comments</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Create comments</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Delete comments</a></li>
-
-                                </ul>
-
                                 <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-
                                 </p>
                             </div>
                         </div>
@@ -94,21 +93,7 @@
                 </div>
 
                 
-                
-                <div class="mt-16">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                        <!-- <a href="" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500"> -->
-                            <div>
-                                
-
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Dictionary</h2>
-
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    Look up words you don`t know.                              </p>
-                                <input id="searched" name="searchedWord" style="background-color: blueviolet;">
-                            </div>
-                        <!-- </a> -->
-
+              
 
                 <div class="flex justify-center mt-16 px-0 sm:items-center sm:justify-between">
                     <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">
@@ -119,6 +104,7 @@
                   
                 </div>
             </div>
-        </div>
+        </div> 
+
     </body>
 </html>
