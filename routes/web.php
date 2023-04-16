@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SentenceController;
+use App\Http\Controllers\LearnerController;
+
 
 
 /*
@@ -29,12 +31,14 @@ Route::prefix('admin')->group(function(){
 });
 
 Route::get('/sentences', [SentenceController::class, 'index'])->name('index');
-Route::get('/sentences/create', [SentenceController::class, 'create'])->name('create_form');
-Route::post('/sentences/create', [SentenceController::class, 'store'])->name('create');
+Route::get('/sentences/create', [SentenceController::class, 'create'])->name('create_form')->middleware('admin');
+Route::post('/sentences/create', [SentenceController::class, 'store'])->name('create')->middleware('admin');
 Route::get('/sentences/{id}', [SentenceController::class, 'show']);
-Route::get('/sentences/{id}/edit', [SentenceController::class, 'edit']);
-Route::put('/edit_sentences/{id}', [SentenceController::class, 'update']);
-Route::delete('/sentences/{id}', [SentenceController::class, 'destroy']);
+Route::get('/sentences/{id}/edit', [SentenceController::class, 'edit'])->middleware('admin');
+Route::put('/edit_sentences/{id}', [SentenceController::class, 'update'])->middleware('admin');
+Route::delete('/sentences/{id}', [SentenceController::class, 'destroy'])->middleware('admin');
+
+Route::resource('/learners', LearnerController::class);
 
 
 
