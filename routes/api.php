@@ -52,9 +52,11 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::post('/logoutAdmin', [AuthController::class, 'logout']);
 
     Route::post('/sentences', [SentenceController::class, 'store']);
-    Route::put('/sentences/{sentence}', [SentenceController::class, 'update']);
-    Route::delete('/sentences/{sentence}', [SentenceController::class, 'destroy']);
+    Route::put('/sentences/{id}', [SentenceController::class, 'update']);
+    Route::delete('/sentences/{id}', [SentenceController::class, 'destroy']);
     Route::post('/commentsAdmin', [CommentController::class, 'store']);
+    Route::delete('/commentsAdmin/{comment}', [CommentController::class, 'destroy']);
+
 
 });
 
@@ -64,6 +66,12 @@ Route::group(['middleware' => ['auth:learners']], function () {
     Route::post('/comments', [CommentController::class, 'store']);
     Route::put('/comments/{id}', [CommentController::class, 'update']);
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy']);
+    Route::put('/learnersUpdate/{id}', [LearnerController::class, 'update']);
+    Route::delete('/learnersDelete/{id}', [LearnerController::class, 'destroy']);
+    Route::get('/Usercomments', [CommentController::class, 'getUserComments']);
+    Route::get('/UserLevelSentences', [SentenceController::class, 'UserLevelSentence']);
+
+
 
 
 
@@ -71,12 +79,10 @@ Route::group(['middleware' => ['auth:learners']], function () {
 });
 
 
-//public routes for the Sentence model
+//public routes
 Route::get('/sentences', [SentenceController::class, 'index']);
 Route::get('/sentences/{sentence}', [SentenceController::class, 'show']);
 Route::get('/sentences/search/{name}', [SentenceController::class, 'search']);
-
-
 Route::get('/comments', [CommentController::class, 'index']);
 Route::get('/comments/{id}', [CommentController::class, 'show']);
 

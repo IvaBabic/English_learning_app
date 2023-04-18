@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Sentence;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Enum;
 
 class SentenceController extends Controller
@@ -61,15 +63,26 @@ class SentenceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sentence $sentence)
+    public function destroy(Sentence $id)
     {
-        
-            $sentence->delete();
+            $sentence = Sentence::find($id);
+            $sentence[0]->delete();
             return response()->json('Success  - Sentence deleted.');
     }
 
     public function search($name)
     {
         return Sentence::where('body', 'like', '%'.$name.'%')->get();
+    }
+
+    public function UserLevelSentence(){
+        
+        $user = Auth::user();
+
+        $sentences = DB::table('sentences')
+                    ->where('level', $user->level)
+                    ->get();
+
+        return $sentences;
     }
 }

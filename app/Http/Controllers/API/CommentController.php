@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\Sentence;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
@@ -61,7 +62,8 @@ class CommentController extends Controller
     
     public function update(Request $request, $id)
     {
-        $comment = Comment::find($id);
+       
+         $comment = Comment::find($id);
 
         if($comment->learner_id == Auth::guard('learners')->user()->id){
         $comment->update($request->all());
@@ -78,7 +80,22 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        if($comment->learner_id == Auth::guard('learners')->user()->id){
         $comment->delete();
         return response()->json('Success  - Comment deleted.');
+    }else{
+        return "Unauthorized.";
+    }
+}
+
+    public function getUserComments()
+    {
+        $user = Auth::user();
+        $comments = DB::table('comments')
+                    ->where('learner_id', $user->id)
+                    ->get();
+
+        return $comments;
+
     }
 }
