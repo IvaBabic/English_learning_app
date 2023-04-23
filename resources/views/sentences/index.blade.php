@@ -9,6 +9,9 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+        
+
 
         <!-- Styles -->
         <style>
@@ -22,7 +25,31 @@
                   <button type="button" class="btn btn-primary" style="background-color:white; width:50%; right:0px" >Logout</button>
               </form> -->
 
-              <a href="{{ route('admin_logout') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Logout</a>
+              <!-- <a href="{{ route('admin_logout') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Logout</a> -->
+
+              <form method="POST" action="{{ route('admin_logout') }}">
+                  @csrf
+                  <button type="button" class="btn btn-primary" style="background-color:white; width:50%; right:0px" >Logout</button>
+              </form> 
+
+              <a href="admin/dashboard" class="btn btn-outline-primary btn-sm" style="color: black;">Go back</a>
+
+              @if(Session::has('success'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                {{ session::get('success')}}
+                </p>
+                <div >
+                    <form action="#">
+                    <input type="submit" value="x" />
+                    </form>
+                </div>
+                </div>
+
+                @endif
+
+
+
 
 
 
@@ -40,6 +67,8 @@
                     @endauth
                 </div>
             @endif
+
+           
 
             
 

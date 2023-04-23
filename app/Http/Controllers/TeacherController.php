@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Learner;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class TeacherController extends Controller
 {
@@ -11,6 +15,7 @@ class TeacherController extends Controller
         return view('admin.login');
     }
 
+   
     public function login(Request $request){
         //dd($request->all());
         $check = $request->all();
@@ -20,6 +25,24 @@ class TeacherController extends Controller
             return back()->with('error', 'Invalid credentials');
         }
     }
+
+
+  //NE PAMTI ADMINA, JA MISLIM
+    // public function login(Request $request) {
+    //     $fields = $request->validate([
+    //         'email' => 'required|string',
+    //         'password' => 'required|string'
+    //     ]);
+
+    //     if($teacher = Teacher::where('email', $fields['email'])->first()){
+    //     if(Hash::check($fields['password'], $teacher->password)){
+    //         return view('admin.dashboard');
+    //     }
+    // }else{
+    //     return back()->with('error', 'Invalid credentials');
+    // };
+    //  }
+
 
     public function dashboard(){
         return view('admin.dashboard');

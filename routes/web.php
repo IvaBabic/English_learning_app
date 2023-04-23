@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SentenceController;
 use App\Http\Controllers\LearnerController;
+use App\Http\Controllers\API\AuthController;
+
 
 
 

@@ -70,7 +70,7 @@ class SentenceController extends Controller
         //         'sentence' => $sentence,
         //         'levels' =>$levels
         //     ]);
-        
+   
         return view('sentences.edit', compact('sentence', 'levels'));
     }
 
@@ -101,6 +101,6 @@ class SentenceController extends Controller
             $sentence->delete();
 
 
-        return redirect('/sentences');
+        return redirect('/sentences')->with('success', 'Sentence Deleted');
     }
 }
