@@ -22,8 +22,26 @@
                   <button type="button" class="btn btn-primary" style="background-color:white; width:50%; right:0px" >Logout</button>
               </form> -->
 
-              <a href="{{ route('admin_logout') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Logout</a>
+              <form method="POST" action="{{ route('admin_logout') }}">
+                  @csrf
+                  <button type="button" class="btn btn-primary" style="background-color:white; width:50%; right:0px" >Logout</button>
+              </form> 
 
+              <a href="admin/dashboard" class="btn btn-outline-primary btn-sm" style="color: black;">Go back</a>
+
+              @if(Session::has('success'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                {{ session::get('success')}}
+                </p>
+                <div >
+                    <form action="#">
+                    <input type="submit" value="x" />
+                    </form>
+                </div>
+                </div>
+
+                @endif
 
 
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
@@ -50,7 +68,7 @@
                             <div>
                                 
 
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Sentences</h2>
+                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Learners List</h2>
 
                                 @foreach($learners as $learner)
                                 <ul>

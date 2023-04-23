@@ -22,7 +22,12 @@
                   <button type="button" class="btn btn-primary" style="background-color:white; width:50%; right:0px" >Logout</button>
               </form> -->
 
-              <a href="{{ route('admin_logout') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Logout</a>
+              <form method="POST" action="{{ route('admin_logout') }}">
+                  @csrf
+                  <button type="button" class="btn btn-primary" style="background-color:white; width:50%; right:0px" >Logout</button>
+              </form> 
+
+              <a href="admin/dashboard" class="btn btn-outline-primary btn-sm" style="color: black;">Go back</a>
 
 
 

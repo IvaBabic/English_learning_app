@@ -87,7 +87,7 @@ class LearnerController extends Controller
         ]);
 
 
-        return redirect('/learners');
+        return redirect('/learners')->with('success', 'Learner updated');
     }
 
     /**
@@ -96,6 +96,6 @@ class LearnerController extends Controller
     public function destroy(Learner $learner)
     {
         $learner->delete();
-        return redirect('/learners');
+        return redirect('/learners')->with('success', 'Learner deleted');
     }
 }

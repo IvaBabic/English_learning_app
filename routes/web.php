@@ -40,7 +40,7 @@ Route::get('/sentences/{id}/edit', [SentenceController::class, 'edit'])->middlew
 Route::put('/edit_sentences/{id}', [SentenceController::class, 'update'])->middleware('admin');
 Route::delete('/sentences/{id}', [SentenceController::class, 'destroy'])->middleware('admin');
 
-Route::resource('/learners', LearnerController::class);
+Route::resource('/learners', LearnerController::class)->middleware('admin');
 
 
 

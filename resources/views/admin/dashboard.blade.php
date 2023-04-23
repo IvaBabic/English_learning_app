@@ -75,10 +75,10 @@
                                 <li><a href="/sentences/create" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Create sentences</a></li>
                                 <li><a href="/sentences" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Delete sentences</a></li>
 
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Browse learners</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Update learners</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Create learners</a></li>
-                                <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Delete learners</a></li>
+                                <li><a href="/learners" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Browse learners</a></li>
+                                <li><a href="/learners" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Update learners</a></li>
+                                <li><a href="/learners/create" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Create learners</a></li>
+                                <li><a href="/learners" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Delete learners</a></li>
 
                                 <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Browse comments</a></li>
                                 <li><a href="" class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"> Update comments</a></li>
